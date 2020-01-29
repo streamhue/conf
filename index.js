@@ -1,19 +1,17 @@
-/* eslint-disable node/no-deprecated-api */
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const assert = require('assert');
 const EventEmitter = require('events');
+const {isDeepStrictEqual} = require('util');
 const dotProp = require('dot-prop');
-const makeDir = require('make-dir');
 const pkgUp = require('pkg-up');
 const envPaths = require('env-paths');
 const writeFileAtomic = require('write-file-atomic');
 const Ajv = require('ajv');
-const debounceFn = require('debounce-fn');
 const semver = require('semver');
 const onetime = require('onetime');
+const nsfw = require('nsfw');
 
 const plainObject = () => Object.create(null);
 const encryptionAlgorithm = 'aes-256-cbc';
@@ -119,9 +117,8 @@ class Conf {
 		const fileStore = this.store;
 		const store = Object.assign(plainObject(), options.defaults, fileStore);
 		this._validate(store);
-		try {
-			assert.deepEqual(fileStore, store);
-		} catch (_) {
+
+		if (!isDeepStrictEqual(fileStore, store)) {
 			this.store = store;
 		}
 
@@ -156,9 +153,8 @@ class Conf {
 	}
 
 	_ensureDirectory() {
-		// TODO: Use `fs.mkdirSync` `recursive` option when targeting Node.js 12.
 		// Ensure the directory exists as it could have been deleted in the meantime.
-		makeDir.sync(path.dirname(this.path));
+		fs.mkdirSync(path.dirname(this.path), {recursive: true});
 	}
 
 	_write(value) {
@@ -390,11 +386,7 @@ class Conf {
 		const onChange = () => {
 			const oldValue = currentValue;
 			const newValue = getter();
-
-			try {
-				// TODO: Use `util.isDeepStrictEqual` when targeting Node.js 10
-				assert.deepEqual(newValue, oldValue);
-			} catch (_) {
+			if (!isDeepStrictEqual(newValue, oldValue)) {
 				currentValue = newValue;
 				callback.call(this, newValue, oldValue);
 			}
@@ -420,9 +412,6 @@ class Conf {
 						const password = crypto.pbkdf2Sync(this.encryptionKey, initializationVector.toString(), 10000, 32, 'sha512');
 						const decipher = crypto.createDecipheriv(encryptionAlgorithm, password, initializationVector);
 						data = Buffer.concat([decipher.update(data.slice(17)), decipher.final()]);
-					} else {
-						const decipher = crypto.createDecipher(encryptionAlgorithm, this.encryptionKey);
-						data = Buffer.concat([decipher.update(data), decipher.final()]);
 					}
 				} catch (_) {}
 			}
