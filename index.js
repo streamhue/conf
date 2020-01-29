@@ -180,17 +180,19 @@ class Conf {
 		}
 	}
 
-	_watch() {
+	async _watch() {
 		this._ensureDirectory();
 
 		if (!fs.existsSync(this.path)) {
 			this._write({});
 		}
 
-		fs.watch(this.path, {persistent: false}, debounceFn(() => {
-			// On Linux and Windows, writing to the config file emits a `rename` event, so we skip checking the event type.
-			this.events.emit('change');
-		}, {wait: 100}));
+		const watcher = await nsfw(this.path, events => {
+			if (events.find(event => event.action === nsfw.actions.MODIFIED)) {
+				this.events.emit('change');
+			}
+		}, {debounceMS: 100});
+		watcher.start();
 	}
 
 	_migrate(migrations, versionToMigrate) {
