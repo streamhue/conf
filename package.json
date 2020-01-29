@@ -1,13 +1,12 @@
 {
-	"name": "conf",
-	"version": "6.2.0",
-	"description": "Simple config handling for your app or module",
+	"name": "@streamhue/conf",
+	"version": "6.3.0",
+	"description": "Fork of sindresorhus/conf",
 	"license": "MIT",
-	"repository": "sindresorhus/conf",
+	"repository": "streamhue/conf",
 	"author": {
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"name": "Nicholai Nissen",
+		"url": "https://streamhue.com"
 	},
 	"engines": {
 		"node": ">=12"
@@ -18,25 +17,6 @@
 	"files": [
 		"index.js",
 		"index.d.ts"
-	],
-	"keywords": [
-		"config",
-		"store",
-		"app",
-		"storage",
-		"conf",
-		"configuration",
-		"settings",
-		"preferences",
-		"json",
-		"data",
-		"persist",
-		"persistent",
-		"save",
-		"load",
-		"read",
-		"write",
-		"cache"
 	],
 	"dependencies": {
 		"ajv": "^6.10.2",
@@ -55,9 +35,16 @@
 		"clear-module": "^4.0.0",
 		"del": "^5.1.0",
 		"delay": "^4.3.0",
+		"husky": "^4.2.1",
 		"p-event": "^4.1.0",
 		"tempy": "^0.3.0",
 		"tsd": "^0.7.4",
 		"xo": "^0.24.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm test",
+			"pre-push": "npm test"
+		}
 	}
 }
