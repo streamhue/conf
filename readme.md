@@ -10,14 +10,14 @@ This fork is made for internal use in Streamhue. You should probably use [`sindr
 ## Install
 
 ```
-$ npm install conf
+$ npm install @streamhue/conf
 ```
 
 
 ## Usage
 
 ```js
-const Conf = require('conf');
+const Conf = require('@streamhue/conf');
 
 const config = new Conf();
 
@@ -71,7 +71,7 @@ You should define your schema as an object where each key is the name of your da
 Example:
 
 ```js
-const Conf = require('conf');
+const Conf = require('@streamhue/conf');
 
 const schema = {
 	foo: {
@@ -110,7 +110,7 @@ The `migrations` object should consist of a key-value pair of `'version': handle
 Example:
 
 ```js
-const Conf = require('conf');
+const Conf = require('@streamhue/conf');
 
 const store = new Conf({
 	migrations: {
@@ -233,7 +233,7 @@ Default: `true`
 Accessing nested properties by dot notation. For example:
 
 ```js
-const Conf = require('conf');
+const Conf = require('@streamhue/conf');
 
 const config = new Conf();
 
@@ -252,7 +252,7 @@ console.log(config.get('foo.bar.foobar'));
 Alternatively, you can set this option to `false` so the whole string would be treated as one key.
 
 ```js
-const Conf = require('conf');
+const Conf = require('@streamhue/conf');
 
 const config = new Conf({accessPropertiesByDotNotation: false});
 
@@ -353,7 +353,7 @@ The `serialize` and `deserialize` options can be used to customize the format of
 Example using YAML:
 
 ```js
-const Conf = require('conf');
+const Conf = require('@streamhue/conf');
 const yaml = require('js-yaml');
 
 const config = new Conf({
