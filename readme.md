@@ -1,4 +1,4 @@
-# conf [![Build Status](https://travis-ci.org/sindresorhus/conf.svg?branch=master)](https://travis-ci.org/sindresorhus/conf)
+# conf [![Build Status](https://img.shields.io/travis/streamhue/conf)](https://travis-ci.com/streamhue/conf) [![npm version](https://img.shields.io/npm/v/@streamhue/conf)](https://www.npmjs.com/package/@streamhue/conf)
 
 > Simple config handling for your app or module
 
