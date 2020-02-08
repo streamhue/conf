@@ -1,13 +1,13 @@
-const { serial: test } = require('ava');
 const fs = require('fs');
 const path = require('path');
+const Conf = require('.');
+const test = require('ava').serial;
 const tempy = require('tempy');
 const del = require('del');
 const pkgUp = require('pkg-up');
 const clearModule = require('clear-module');
 const pEvent = require('p-event');
 const delay = require('delay');
-const Conf = require('.');
 
 const fixture = '🦄';
 
