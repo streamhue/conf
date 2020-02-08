@@ -4,4 +4,4 @@ os:
   - windows
 language: node_js
 node_js:
-  - '12'
+  - '12.13.0'

@@ -743,11 +743,6 @@ test('.delete() - without dot notation', t => {
 });
 
 test('`watch` option watches for config file changes by another process', async t => {
-	if (process.platform === 'darwin' && process.version.split('.')[0] === 'v8') {
-		t.plan(0);
-		return;
-	}
-
 	const cwd = tempy.directory();
 	const conf1 = new Conf({cwd, watch: true});
 	const conf2 = new Conf({cwd});
@@ -773,12 +768,6 @@ test('`watch` option watches for config file changes by another process', async 
 });
 
 test('`watch` option watches for config file changes by file write', async t => {
-	// TODO: Remove this when targeting Node.js 10.
-	if (process.platform === 'darwin' && process.version.split('.')[0] === 'v8') {
-		t.plan(0);
-		return;
-	}
-
 	const cwd = tempy.directory();
 	const conf = new Conf({cwd, watch: true});
 	conf.set('foo', '🐴');
