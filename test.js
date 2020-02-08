@@ -1,13 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import {serial as test} from 'ava';
-import tempy from 'tempy';
-import del from 'del';
-import pkgUp from 'pkg-up';
-import clearModule from 'clear-module';
-import pEvent from 'p-event';
-import delay from 'delay';
-import Conf from '.';
+const { serial: test } = require('ava');
+const fs = require('fs');
+const path = require('path');
+const tempy = require('tempy');
+const del = require('del');
+const pkgUp = require('pkg-up');
+const clearModule = require('clear-module');
+const pEvent = require('p-event');
+const delay = require('delay');
+const Conf = require('.');
 
 const fixture = '🦄';
 
@@ -936,7 +936,7 @@ test('migrations - should cleanup migrations with non-numeric values', t => {
 	t.is(conf.get('heart'), '❤');
 });
 
-test('migrations - should infer the applicationVersion from the package.json when it isn\'t specified', t => {
+test('migrations - should infer the applicationVersion = require(the package.json when it isn\'t specified', t => {
 	const cwd = tempy.directory();
 
 	const conf = new Conf({cwd, migrations: {

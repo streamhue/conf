@@ -183,10 +183,8 @@ class Conf {
 			this._write({});
 		}
 
-		const watcher = await nsfw(this.path, events => {
-			if (events.find(event => event.action === nsfw.actions.MODIFIED)) {
-				this.events.emit('change');
-			}
+		const watcher = await nsfw(this.path, _ => {
+			this.events.emit('change');
 		}, {debounceMS: 100});
 		watcher.start();
 	}
