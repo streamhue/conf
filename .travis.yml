@@ -3,5 +3,8 @@ os:
   - osx
   - windows
 language: node_js
+cache:
+  directories:
+  - "$HOME/.npm"
 node_js:
   - '12.13.0'
