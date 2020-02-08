@@ -11,7 +11,7 @@ const writeFileAtomic = require('write-file-atomic');
 const Ajv = require('ajv');
 const semver = require('semver');
 const onetime = require('onetime');
-const nsfw = require('nsfw');
+const chokidar = require('chokidar');
 
 const plainObject = () => Object.create(null);
 const encryptionAlgorithm = 'aes-256-cbc';
@@ -183,10 +183,7 @@ class Conf {
 			this._write({});
 		}
 
-		const watcher = await nsfw(this.path, _ => {
-			this.events.emit('change');
-		}, {debounceMS: 100});
-		watcher.start();
+		chokidar.watch(this.path).on('all', event => this.events.emit(event));
 	}
 
 	_migrate(migrations, versionToMigrate) {

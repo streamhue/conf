@@ -20,10 +20,10 @@
 	],
 	"dependencies": {
 		"ajv": "^6.10.2",
+		"chokidar": "^3.3.1",
 		"dot-prop": "^5.0.0",
 		"env-paths": "^2.2.0",
 		"json-schema-typed": "^7.0.1",
-		"nsfw": "^1.2.7",
 		"onetime": "^5.1.0",
 		"pkg-up": "^3.0.1",
 		"semver": "^6.2.0",
@@ -48,6 +48,8 @@
 		}
 	},
 	"xo": {
-		"ignores": ["test.js"]
+		"ignores": [
+			"test.js"
+		]
 	}
 }
