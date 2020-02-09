@@ -12,6 +12,7 @@ const Ajv = require('ajv');
 const semver = require('semver');
 const onetime = require('onetime');
 const chokidar = require('chokidar');
+const debounceFn = require('debounce-fn');
 
 const plainObject = () => Object.create(null);
 const encryptionAlgorithm = 'aes-256-cbc';
@@ -183,7 +184,7 @@ class Conf {
 			this._write({});
 		}
 
-		chokidar.watch(this.path).on('all', event => this.events.emit(event));
+		chokidar.watch(this.path).on('all', debounceFn(event => this.events.emit(event), {wait: 100}));
 	}
 
 	_migrate(migrations, versionToMigrate) {
