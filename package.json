@@ -1,6 +1,6 @@
 {
 	"name": "@streamhue/conf",
-	"version": "7.0.0",
+	"version": "7.0.1",
 	"description": "Fork of sindresorhus/conf",
 	"license": "MIT",
 	"repository": "streamhue/conf",
